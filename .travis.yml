@@ -1,0 +1,52 @@
+language: python
+python:
+  - "3.7"
+
+cache:
+  directories:
+  - "$HOME/google-cloud-sdk/"
+
+stages:
+  - name: after_script
+    if: branch = master
+
+env:
+  global:
+    - GOOGLE_CLOUD_KEYFILE_JSON=~/account.json
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+    - PYTHONPATH=yugiohbot
+
+addons:
+  apt:
+    update: true
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_7d671914628f_key -iv $encrypted_7d671914628f_iv -in gcp_terraform.json.enc -out ~/account.json -d
+  - sudo apt-get install -y zip unzip
+  - if [ ! -d $HOME/google-cloud-sdk/bin ]; then
+    rm -rf $HOME/google-cloud-sdk;
+    curl https://sdk.cloud.google.com | bash > /dev/null;
+    fi
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud --quiet version
+  - gcloud --quiet components install beta
+  - gcloud --quiet components update
+  - wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
+  - unzip terraform_${TERRAFORM}_linux_amd64.zip
+  - sudo mv terraform /usr/local/bin/
+  - terraform --version
+  - pip install -r yugiohbot/requirements.txt
+  - pip install pytest-cov codecov
+
+install:
+  - cp -a yugiohbot/. function/
+
+script:
+  - pytest --cov=./ --ignore=function
+
+after_script:
+  - chmod +x ./deployment/deploy.sh
+  - ./deployment/deploy.sh
+
+after_success:
+  - codecov
