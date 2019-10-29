@@ -19,7 +19,7 @@ terraform init
 
 echo "Planning Terraform."
 terraform plan \
-    -var="access_token=$FB_ACCESS_TOKEN" \
+    -var="access_token=$ACCESS_TOKEN" \
     -out=output.tfplan
 
 echo "Applying Terraform."
