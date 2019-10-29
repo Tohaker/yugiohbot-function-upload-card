@@ -12,11 +12,20 @@ logging.basicConfig(level=logging.DEBUG)
 def function(request):
     request_json = request.get_json(silent=True)
     request_args = request.args
-    logging.debug(request_json)
-    logging.debug(request_args)
+    print(request_json)
+    print(request_args)
 
-    title = request_json['title']
-    image = request_json['image']
+    title = 'ERROR'
+    image = 'ERROR'
+
+    if request_json is not None:
+        title = request_json['title']
+        image = request_json['image']
+    elif request_args is not None:
+        title = request_args.get('title')
+        image = request_args.get('image')
+    else:
+        exit(1)
 
     message = choose_caption(title)
     cloud_storage.download_image(image)
@@ -26,7 +35,7 @@ def function(request):
     graph = facebook.GraphAPI(access_token)
     post = graph.put_photo(image=open('/tmp/' + image, 'rb'), message=message)
 
-    logging.debug("Posted photo with post_id {}.".format(post['post_id']))
+    print("Posted photo with post_id {}.".format(post['post_id']))
 
 
 def choose_caption(title):

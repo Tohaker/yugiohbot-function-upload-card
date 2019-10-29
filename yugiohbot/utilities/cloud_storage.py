@@ -9,4 +9,4 @@ def download_image(file):
     blob = bucket.blob(file)
 
     blob.download_to_filename('/tmp/' + file)
-    logging.debug('Blob {} downloaded.'.format(file))
+    print('Blob {} downloaded.'.format(file))
