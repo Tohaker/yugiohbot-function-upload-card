@@ -27,6 +27,9 @@ def function(request):
     else:
         exit(1)
 
+    print(title)
+    print(image)
+
     message = choose_caption(title)
     cloud_storage.download_image(image)
 
