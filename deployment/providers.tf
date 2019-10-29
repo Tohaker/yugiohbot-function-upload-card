@@ -7,7 +7,7 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket      = "yugiohbot-tf-state"
-    prefix      = "card-generator"
+    prefix      = "card-uploader"
     credentials = "~/account.json"
   }
 }
