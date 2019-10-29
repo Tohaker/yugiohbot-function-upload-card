@@ -10,10 +10,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def function(request):
-    request_json = request.get_json(silent=True)
-    request_args = request.args
+    request_json = request.get_json()
     print(request_json)
-    print(request_args)
 
     title = 'ERROR'
     image = 'ERROR'
@@ -21,9 +19,6 @@ def function(request):
     if request_json is not None:
         title = request_json['title']
         image = request_json['image']
-    elif request_args is not None:
-        title = request_args.get('title')
-        image = request_args.get('image')
     else:
         exit(1)
 
