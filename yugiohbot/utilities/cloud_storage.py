@@ -8,5 +8,5 @@ def download_image(file):
     bucket = storage_client.get_bucket('generated-cards')
     blob = bucket.blob(file)
 
-    blob.download_to_filename(file)
+    blob.download_to_filename('/tmp/' + file)
     logging.debug('Blob {} downloaded.'.format(file))

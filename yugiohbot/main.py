@@ -24,7 +24,7 @@ def function(request):
     access_token = os.getenv('ACCESS_TOKEN')
 
     graph = facebook.GraphAPI(access_token)
-    post = graph.put_photo(image=open(image, 'rb'), message=message)
+    post = graph.put_photo(image=open('/tmp/' + image, 'rb'), message=message)
 
     logging.debug("Posted photo with post_id {}.".format(post['post_id']))
 
