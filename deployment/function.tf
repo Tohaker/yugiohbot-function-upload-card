@@ -13,7 +13,6 @@ resource "google_cloudfunctions_function" "function" {
 
   environment_variables = {
     ACCESS_TOKEN  = var.access_token
-    FB_PAGE_ID    = var.fb_page_id
   }
 }
 

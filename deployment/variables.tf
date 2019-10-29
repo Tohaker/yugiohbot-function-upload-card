@@ -27,10 +27,6 @@ variable "access_token" {
   description = "The Facebook access token to allow posting to the page."
 }
 
-variable "fb_page_id" {
-  description = "The Facebook page ID."
-}
-
 variable "service_account" {
   description = "The name of the service account that is allowed to invoke the function."
   default     = "621027686268-compute@developer.gserviceaccount.com"
