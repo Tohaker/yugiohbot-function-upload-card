@@ -37,6 +37,9 @@ install:
   - pip install -r yugiohbot/requirements.txt
   - pip install pytest-cov codecov
 
+script:
+  - python --version
+
 before_deploy:
   - chmod +x ./deployment/deploy.sh
 
