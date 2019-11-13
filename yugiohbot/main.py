@@ -17,7 +17,6 @@ def function(request):
     title = 'ERROR'
     image = 'ERROR'
     image_id = 'ERROR'
-    image_name = 'ERROR'
 
     if request_json is not None:
         title = request_json['title']
@@ -43,7 +42,9 @@ def function(request):
     res = requests.get(url, params=params)
     if res.status_code == 200:
         comment = graph.put_comment(object_id=post['post_id'],
-                                    message="Card image: {0} - {1}".format(str(image_id), res.json()[0]['name']))
+                                    message="Card Name: {0}\nCard image: {1} - {2}".format(title, str(image_id),
+                                                                                           res.json()[0]['name']))
+        print("Posted comment with comment_id {}".format(comment['id']))
 
     print("Posted photo with post_id {}.".format(post['post_id']))
 
