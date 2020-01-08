@@ -45,6 +45,10 @@ def function(request):
                                     message="Card Name: {0}\nCard image: {1} - {2}".format(title, str(image_id),
                                                                                            res.json()[0]['name']))
         print("Posted comment with comment_id {}".format(comment['id']))
+    else:
+        comment = graph.put_comment(object_id=post['post_id'],
+                                    message="Card Name: {0}\nCard image: {1}".format(title, str(image_id)))
+        print("Posted comment with comment_id {}".format(comment['id']))
 
     print("Posted photo with post_id {}.".format(post['post_id']))
 
@@ -54,6 +58,6 @@ def choose_caption(title):
                 "HAH! Your monsters may be powerful, Kaiba, but they are no match for the heart of the cards! My grandfather gave me this card, and I will use it wisely. Go, {}!",
                 "Oh no! How will Joey win when he's facing {}?!", "{}? What's that? I've never seen that card before!",
                 "Let's Duel! {}!", "It's time to d-d-d-d-d-duel!", "With this {}, you're finished!",
-                "My latest creation! {}!", "Welp, this one's going on the ban list..."]
+                "My latest creation! {}!", "Welp, this one's going on the ban list...", "Aha! {} is just what my deck needed!"]
     chosen = random.choice(captions)
     return chosen.format(title)
