@@ -1,6 +1,6 @@
 # YuGiOhBot: Card Uploader Function
 
-Build status: ![](https://travis-ci.org/YuGiOhBot3000/yugiohbot-function-upload-card.svg?branch=master)
+Build status: [![Continuous integration Actions Status](https://github.com/YuGiOhBot3000/yugiohbot-function-upload-card/workflows/CI/badge.svg)](https://github.com/YuGiOhBot3000/yugiohbot-function-upload-card/actions)
 
 This project sets up the card uploader for the YuGiOhBot.
 

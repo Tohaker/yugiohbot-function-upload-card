@@ -34,10 +34,10 @@ def function(request):
 
     access_token = os.getenv('ACCESS_TOKEN')
 
-    graph = facebook.GraphAPI(access_token)
+    graph = facebook.GraphAPI(access_token, version="8.0")
     post = graph.put_photo(image=open('/tmp/' + image, 'rb'), message=message)
 
-    url = 'https://db.ygoprodeck.com/api/v5/cardinfo.php'
+    url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php'
     params = {'name': image_id}
     res = requests.get(url, params=params)
     if res.status_code == 200:
